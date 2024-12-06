@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karanveer Mehra News</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+     <script>
+        async function handleLinkClick(buttonName, event) {
+            try {
+                const response = await fetch(`/button-click/${buttonName}`, {
+                    method: "POST",
+                });
+                const data = await response.json();
+                if (response.ok) {
+                    updateClickCounts(data.counts);
+                } else {
+                    console.error(data.error);
+                }
+            } catch (error) {
+                console.error("Error clicking link:", error);
+            }
+        }
+
+        // Fetch the initial click counts
+        
+
+        // Update click counts on the page
+        function updateClickCounts(counts) {
+            document.getElementById("youtube-count").textContent = counts.youtube || 0;
+            document.getElementById("wikipedia-count").textContent = counts.wikipedia || 0;
+            document.getElementById("google-count").textContent = counts.google || 0;
+        }
+
+        // Initialize counts on page load
+        
+    </script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: rgba(0, 0, 0, 0.4);">
+        <div class="container">
+            <a class="navbar-brand text-white" href="/">Karanveer Mehra</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                      <a class="nav-link active" aria-current="page" href="/" style="color:white;font-weight:bold;">Home</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/about" style="color:white;font-weight:bold;">About</a>
+                    </li>
+                  </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container text-center mt-5 pt-5">
+        <div class="row">
+            <div class="col">
+                <a class="btn btn-outline-dark me-3" href="https://en.wikipedia.org/wiki/Special:Search?search=Karan+Veer+Mehra" target="_blank" onclick="handleLinkClick('youtube', event)">
+                    <i class="fa-brands fa-wikipedia-w"></i> Search Wikipedia
+                </a>
+            </div>
+            <div class="col">
+                <a class="btn btn-outline-primary me-3" href="https://www.google.com/search?q=Karan+Veer+Mehra" target="_blank"  onclick="handleLinkClick('wikipedia', event)">
+                    <i class="fa-brands fa-google" style="color: #B197FC;"></i> Search Google
+                </a>
+            </div>
+            <div class="col">
+                <a class="btn btn-outline-danger" href="https://www.youtube.com/results?search_query=Karan+Veer+Mehra" target="_blank" onclick="handleLinkClick('google', event)">
+                    <i class="fa-brands fa-youtube" style="color: #ff0000;"></i> Search YouTube
+                </a>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Carousel Section -->
+    <div id="newsCarousel" class="carousel slide mt-5" data-bs-ride="carousel">
+        <!-- Indicators -->
+        <div class="carousel-indicators">
+            {% for article in articles[:3] %}
+            <button type="button" data-bs-target="#newsCarousel" data-bs-slide-to="{{ loop.index0 }}" {% if loop.index == 1 %}class="active"{% endif %} aria-current="true" aria-label="Slide {{ loop.index }}"></button>
+            {% endfor %}
+        </div>
+
+        <!-- Slides -->
+        <div class="carousel-inner">
+            {% for article in articles[:3] %}
+            <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
+                <a href="{{ article['url'] }}" target="_blank">
+                 <img src="{{ article['image'] }}" class="d-block w-100" alt="{{ article['title'] }}" style="height: 400px; object-fit: cover;">
+                </a>
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>{{ article['title'] }}</h5>
+                    <p>{{ article['text'] }}</p>
+                    <a href="{{ article['url'] }}" target="_blank" class="btn btn-primary">Read More</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#newsCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#newsCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <!-- News Cards Section -->
+    <div class="news-container">
+        {% for article in articles %}
+        <a href="{{ article.url }}" target="_blank" class="card-link" style="text-decoration:none;">
+            <div class="card">
+                <img src="{{ article.image or url_for('static', path='placeholder.jpg') }}" alt="{{ article.title }}">
+                <div class="card-content">
+                    <h3>{{ article.title }}</h3>
+                    <p>{{ article.text }}</p>
+                    <a href="{{ article.url }}" class="btn btn-primary" target="_blank">Read More</a>
+                </div>
+            </div>
+        </a>
+        <div class="jis" style="height:20px;"></div>
+        {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    <div class="container mt-3">
+        <ul class="pagination">
+            {% if prev_page %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ prev_page }}"><< Previous</a>
+            </li>
+            {% endif %}
+            {% if next_page %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ next_page }}">Next >></a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Karan Veer Mehra News Portal | All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
