@@ -1,0 +1,196 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+    padding-top: 50px;
+}
+
+h1, h2, h3 {
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar */
+.navbar {
+    background-color: rgba(0, 0, 0, 0.4) !important; /* Transparent background */
+    backdrop-filter: blur(10px); /* Apply a blur effect to the background */
+}
+
+.navbar-nav .nav-item .btn {
+    transition: transform 0.3s ease-in-out; /* Smooth animation for buttons */
+}
+
+.navbar-nav .nav-item .btn:hover {
+    transform: scale(1.1); /* Slight zoom effect on hover */
+}
+
+/* Navbar links */
+.navbar-brand, .navbar-nav .nav-item .btn {
+    color: #fff !important; /* White text color for the navbar */
+}
+
+.navbar-toggler-icon {
+    background-color: #fff; /* White icon for the mobile menu */
+}
+
+
+/* Carousel */
+.carousel {
+    position: relative;
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.carousel-item {
+    position: relative;
+}
+
+.carousel img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
+}
+
+.carousel-caption {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-align: center;
+    max-width: 80%;
+}
+
+.carousel-caption h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.carousel-caption p {
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+
+/* News Cards */
+.news-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.card {
+    width: calc(100% - 40px); /* Mobile view */
+    max-width: 300px; /* Larger screens */
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 15px;
+}
+
+.card-content h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.card-content p {
+    font-size: 0.9rem;
+    color: #666;
+    max-height: 3.6em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.card-content .btn {
+    display: inline-block;
+    padding: 10px 15px;
+    background: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.card-content .btn:hover {
+    background: #0056b3;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+    font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+    .card {
+        width: calc(50% - 40px);
+    }
+}
+
+@media (min-width: 1024px) {
+    .card {
+        width: calc(33.33% - 40px);
+    }
+
+    .carousel-caption h2 {
+        font-size: 2rem;
+    }
+
+    .carousel-caption p {
+        font-size: 1.2rem;
+    }
+}
+.fixed-pagination {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Slightly transparent background */
+    text-align: center; /* Center align buttons */
+    padding: 10px 0; /* Add some padding for better visuals */
+    z-index: 1000; /* Ensure it stays above other elements */
+}
+
+.fixed-pagination .btn {
+    margin: 0 10px; /* Add spacing between the buttons */
+    padding: 10px 20px; /* Make buttons visually appealing */
+    font-size: 16px; /* Adjust font size for better readability */
+}
+.pagination {
+    justify-content: center;
+}
