@@ -1,1 +1,55 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embed Twitter Post</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f5f8fa;
+        }
+
+        .twitter-container {
+            background: #ffffff;
+            border: 1px solid #e1e8ed;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .twitter-container h1 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #1da1f2;
+            text-align: center;
+        }
+
+        .twitter-embed {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="twitter-container">
+        <h1>Embedded Twitter Post</h1>
+        <div class="twitter-embed">
+            <blockquote class="twitter-tweet">
+                <p lang="en" dir="ltr">This is an example of an embedded tweet. <a href="https://twitter.com/Twitter/status/1456341908576684035">November 4, 2021</a></p>&mdash; Twitter (@Twitter) <a href="https://twitter.com/Twitter/status/1456341908576684035">November 4, 2021</a>
+            </blockquote>
+        </div>
+    </div>
+
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</body>
+</html>
