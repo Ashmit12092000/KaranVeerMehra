@@ -134,6 +134,9 @@ async def click_counts():
 @app.get("/about", response_class=HTMLResponse)
 async def about(request: Request):
     return templates.TemplateResponse("about.html", {"request": request})
+@app.get("/Xpoll", response_class=HTMLResponse)
+async def Xpoll(request: Request):
+    return templates.TemplateResponse("twitter_poll.html", {"request": request})
 
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request, page: int = Query(1)):
